@@ -21,6 +21,7 @@ classifiers = [
   "Programming Language :: Python :: 3.7",
   "Programming Language :: Python :: 3.8",
   "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
   "Topic :: Software Development :: Libraries :: Python Modules",
   "Typing :: Typed",
 ]
@@ -77,7 +78,7 @@ addopts = """\
 """
 
 [tool.coverage.report]
-fail_under = 100
+fail_under = 100.00
 exclude_lines = [
     'if TYPE_CHECKING:',
     'pragma: no cover'
