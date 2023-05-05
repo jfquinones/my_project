@@ -16,7 +16,6 @@ jobs:
       - uses: ./.github/actions/python-poetry-env
       - name: Update version
         id: updated_version
-        shell: bash
         run: |
           poetry version ${{ github.event.inputs.version }}
           version=$(poetry version --short)
@@ -24,7 +23,6 @@ jobs:
 
       - name: Update changelog
         id: changelog
-        shell: bash
         run: |
           poetry run kacl-cli release ${{ steps.updated_version.outputs.version }} --modify --auto-link
           echo "" >> CHANGELOG.md
@@ -41,7 +39,6 @@ jobs:
           message: 'Release ${{ steps.updated_version.outputs.version }}'
 
       - name: Create tag
-        shell: bash
         run: |
           git tag "${{ steps.updated_version.outputs.version }}"
           git push origin "${{ steps.updated_version.outputs.version }}"

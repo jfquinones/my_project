@@ -15,23 +15,19 @@ jobs:
           python-version: 3.9
 
       - name: Install dependencies
-        shell: bash
         run: python -m pip install cruft poetry jello tabulate
 
       - name: Update project structure
-        shell: bash
         run: |
           cruft update -y
 
       - name: Check if there are changes
         id: changes
-        shell: bash
         run: |
           echo "changed=$(git status --porcelain | wc -l)" >> "$GITHUB_OUTPUT"
 
       - name: apply additional changes and fixes
         if: steps.changes.outputs.changed > 0
-        shell: bash
         run: |
           poetry lock --no-update  # add new dependencies
           poetry install
@@ -40,7 +36,6 @@ jobs:
       - name: Get template versions
         id: get_versions
         if: steps.changes.outputs.changed > 0
-        shell: bash
         run: |
           CURRENT_VERSION=$(git show HEAD:.cruft.json | jello -r "_['commit'][:8]")
           NEXT_VERSION=$(jello -r "_['commit'][:8]" < .cruft.json)
@@ -50,7 +45,6 @@ jobs:
       - name: Get changelog
         id: get_changelog
         if: steps.changes.outputs.changed > 0
-        shell: bash
         run: |
           TEMPLATE=$(jello -r "_['template']" < .cruft.json)
           git clone "$TEMPLATE" /tmp/template
