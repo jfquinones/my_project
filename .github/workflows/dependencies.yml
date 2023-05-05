@@ -16,6 +16,7 @@ jobs:
 
       - name: Gather outdated dependencies
         id: check_for_outdated_dependencies
+        shell: bash
         run: |
           body=$(poetry show -o -n)
           echo "body=$body" >> $GITHUB_OUTPUT
@@ -29,7 +30,7 @@ jobs:
           body=$(cat <<EOF
           The following packages are outdated
 
-          $body
+          "$body"
           EOF
           )
           body="${body//'%'/'%25'}"
