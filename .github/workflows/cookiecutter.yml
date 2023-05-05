@@ -39,13 +39,8 @@ jobs:
         run: |
           CURRENT_VERSION=$(git show HEAD:.cruft.json | jello -r "_['commit'][:8]")
           NEXT_VERSION=$(jello -r "_['commit'][:8]" < .cruft.json)
-          echo "{name}={value}" >> $GITHUB_OUTPUT
           echo ::set-output name="current_version::$CURRENT_VERSION"
           echo ::set-output name="next_version::$NEXT_VERSION"
-
-          A workflow using save-state or set-output like the following
-
-
 
       - name: Get changelog
         id: get_changelog
