@@ -1,4 +1,4 @@
-from src.mproject import main
+from src.my_project import main
 
 
 def test_func() -> None:
