@@ -15,18 +15,22 @@ jobs:
           python-version: 3.9
 
       - name: Install dependencies
+        shell: bash
         run: python -m pip install cruft poetry jello tabulate
 
       - name: Update project structure
+        shell: bash
         run: |
           cruft update -y
 
       - name: Check if there are changes
         id: changes
+        shell: bash
         run: echo "changed=$(git status --porcelain | wc -l)" >> $GITHUB_OUTPUT
 
       - name: apply additional changes and fixes
         if: steps.changes.outputs.changed > 0
+        shell: bash
         run: |
           poetry lock --no-update  # add new dependencies
           poetry install
