@@ -2,7 +2,7 @@ name: Autoupdate dependencies
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 0 1 * *"
+    - cron: "0 0 1,15 * *" # at the start of day 1 and 15 of every month
 
 jobs:
   auto-update-dependencies:
